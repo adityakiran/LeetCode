@@ -1,0 +1,33 @@
+public class Solution {
+    public int findMin(int[] num) {
+        //divide and conquer
+        if(num.length==1)
+         return num[0];
+        if(num.length==2)
+         {
+             if(num[0]<num[1])
+              return num[0];
+             return num[1];
+         }
+         int []dest = new int[num.length/2];
+         int mid = num.length/2;
+         if(num[mid]<num[mid-1]&&num[mid]<num[mid+1])
+           return num[mid];
+         if(num[mid]>num[0]&&num[mid]>num[num.length-1])
+         {
+          if(num.length%2!=0)
+          {
+          System.arraycopy(num,num.length/2+1,dest,0,num.length/2);
+          return findMin(dest);
+          }
+          else
+          {
+              int []dest1 = new int[num.length/2-1];
+              System.arraycopy(num,num.length/2+1,dest1,0,num.length/2-1);
+              return findMin(dest1);
+          }
+         }
+         System.arraycopy(num,0,dest,0,num.length/2);
+         return findMin(dest);
+    }
+}

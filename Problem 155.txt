@@ -1,0 +1,48 @@
+class MinStack {
+    //LinkedList<Integer>  arr = new LinkedList<Integer> ();
+    int [] arr = new int[10];
+    int sz=0;
+    int min = Integer.MAX_VALUE;
+    public void push(int x) {
+        if(sz<arr.length)
+        {
+        arr[sz] = x;
+        sz++;
+        }
+        else
+        {
+            int []ar1 = new int[2*arr.length];
+            System.arraycopy(arr,0,ar1,0,arr.length);
+            arr = ar1;
+            arr[sz] = x;
+            sz++;
+        }
+        if(x<min)
+         min = x;
+    }
+
+    public void pop() {
+        if(sz>0)
+        {
+        if(arr[sz-1]==min)
+         {
+             min = Integer.MAX_VALUE;
+             for(int g=0;g<sz-1;g++)
+             {
+                 if(arr[g]<min)
+                  min = arr[g];
+             }
+         }
+        
+        sz--;
+        }
+    }
+
+    public int top() {
+        return arr[sz-1];
+    }
+
+    public int getMin() {
+        return min;
+    }
+}

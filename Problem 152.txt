@@ -1,0 +1,70 @@
+public class Solution {
+    public int maxProduct(int[] A) {
+     if(A.length==1)
+      return A[0];
+     int res=Integer.MIN_VALUE,tmp=A[0];
+     int max = 0;
+     int min = 0;
+     int flag=0;
+     if(A[0]>0)
+     {
+      max = A[0];
+      min = 1;
+     }
+     else
+     {
+         max = 1;
+         min = A[0];
+     }
+     for(int i=1;i<A.length;i++)
+     {
+         if(A[i]==0)
+         {
+             if(res<max)
+             res = max;
+             max=0;
+             min=0;
+             flag=1;
+         }
+         if(A[i]>0)
+         {
+             if(flag==1)
+             {
+                 max = A[i];
+                 min = min*A[i];
+             }
+             else
+             {
+             max = max*A[i];
+             min = min*A[i];
+             }
+         }
+         if(A[i]<0)
+         {
+             if(flag==1)
+             {
+               min = A[i];
+               
+             }
+             else
+             {
+             int temp = min;
+             min = max*A[i];
+             if(A[i]*temp>max)
+              max = A[i]*temp;
+             else
+             {
+              if(res<max)
+              res = max;
+              max=1;
+             }
+             }
+         }
+     }
+     if(max<min)
+              max = min;
+     if(max<res)
+              max = res;
+        return max;
+    }
+}

@@ -1,0 +1,57 @@
+public class LRUCache {
+    ArrayList<A> ar = null;
+    int in=0,cp=0;
+    public LRUCache(int capacity) {
+        ar = new ArrayList<A>(capacity);
+        cp = capacity;
+    }
+    
+    public int get(int key) {
+    
+        for(int i=0;i<ar.size();i++)
+        {
+            if(key==ar.get(i).key)
+            {
+             ar.get(i).count++;
+             return ar.get(i).value;
+            }
+        }
+        return -1;
+    }
+    
+    public void set(int key, int value) {
+        in++;
+        
+        if(in>cp)
+        {
+            int min = Integer.MAX_VALUE;
+            int index=0;
+         for(int i=0;i<ar.size();i++)
+        {
+            if(ar.get(i).count<min)
+            {
+             min = ar.get(i).count;
+             index = i;
+            }
+            }
+            A obj = ar.get(index);
+            obj.key = key;
+            obj.value = value;
+            ar.set(index,obj);
+        }
+        else
+        {
+            A ob = new A();
+            ob.key = key;
+            ob.value = value;
+            ob.count  =0;
+            ar.add(ob);
+        }
+    }
+}
+class A
+{
+    int key;
+    int value;
+    int count=0;
+}

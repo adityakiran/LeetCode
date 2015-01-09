@@ -1,0 +1,56 @@
+public class Solution {
+    public String reverseWords(String s) {
+        
+        int st = 0;
+        int en = s.length()-1;
+        while(st<en)
+        {
+        if(s.charAt(st)!=' '&&s.charAt(en)!=' ')
+         break;
+        if(s.charAt(st)==' ')
+         st++;
+        if(s.charAt(en)==' ')
+         en--;
+        }
+         String temp = s.substring(st,en+1);
+          if(temp.equals(" "))
+           {
+               temp="";
+               return temp;
+           }
+          if(temp.length()==0||temp.length()==1)
+            return temp;
+         ArrayList<String> an = new ArrayList<String>();
+         int k = st;int flag=0;
+         while(st<=s.length()-1)
+          {
+              if(s.charAt(st)==' '&&flag==0)
+               {
+                   
+                   an.add(s.substring(k,st));
+                   flag=1;
+               }
+               if(st==s.length()-1&&flag==0)
+               {
+                   an.add(s.substring(k,st+1));
+               }
+              
+               if(flag==1&&s.charAt(st)!=' ')
+               {
+                   flag=0;
+                   k = st;
+               }
+          
+              st++;
+          }
+        String ans="";
+        for(int sz=an.size()-1;sz>=0;sz--)
+        {
+            if(sz>0)
+            ans = ans+ an.get(sz)+" ";
+            else
+            ans = ans+an.get(sz);
+        }
+        return ans;
+    }
+}

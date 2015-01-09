@@ -1,0 +1,49 @@
+public class Solution {
+    public boolean wordBreak(String s, Set<String> dict)
+    {
+        int len = s.length();
+        String [][] n = new String[len][len];
+        return wordBreak(s,dict,n,0);
+    }
+    public boolean wordBreak(String s, Set<String> dict,String [][] n,int st) {
+        
+       // String [][] n = new String[len][len];
+        if(s.length()==0)
+         return false;
+        if(s.length()==1)
+          {
+              if(dict.contains(s))
+               return true;
+              return false;
+          }
+        //using divide and conquer
+        if(dict.contains(s))
+               return true;
+       
+        for(int i=0;i<=s.length()-2;i++)
+         {
+           String s1 = s.substring(0,i+1);
+           String s2 = s.substring(i+1,s.length());
+           if(n[st][st+i]==null)
+            {
+                if(wordBreak(s1,dict,n,st))
+                 n[st][i+st] = "true";
+                else
+                 n[st][i+st] = "false";
+            }
+            if(n[st+i+1][st+s.length()-1]==null)
+            {
+                if(wordBreak(s2,dict,n,st+i+1))
+                 n[st+i+1][st+s.length()-1] = "true";
+                else
+                 n[st+i+1][st+s.length()-1] = "false";
+            }
+           //if(wordBreak(s1,dict)&&wordBreak(s2,dict))
+             if(n[st][st+i].equals("true")&&n[st+i+1][st+s.length()-1].equals("true"))
+             return true;
+            
+         }
+        
+        return false;
+    }
+}

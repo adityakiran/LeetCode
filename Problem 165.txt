@@ -1,0 +1,27 @@
+public class Solution {
+    public int compareVersion(String version1, String version2) {
+        
+         
+          while(true)
+          {
+          if(!version1.contains("."))
+          version1 = version1+".0";
+         if(!version2.contains("."))
+          version2 = version2+".0"; 
+          String[] parts = version1.split("\\.",2);
+          String[] parts1 = version2.split("\\.",2); 
+          int a = Integer.parseInt(parts[0]);
+          int b = Integer.parseInt(parts1[0]);
+          if(a>b)
+           return 1;
+          if(b>a)
+           return -1;
+          version1 = parts[1];
+          version2 = parts1[1];
+          if(version1.equals(version2))
+            break;
+          }
+          return 0;
+        
+    }
+}

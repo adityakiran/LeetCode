@@ -1,0 +1,46 @@
+public class Solution {
+    public String convertToTitle(int n) {
+        HashMap<Integer,String> map = new HashMap<Integer,String>();
+        String res="";
+        for(int i=0;i<=25;i++)
+        {
+            String re="";
+            char x='A';
+		     char y = (char)(x+i);
+		     re  = re+y;
+		    map.put(i+1,re);
+		    
+        }
+         if(n<=26)
+        {
+            res = map.get(n);
+            return res;   
+        }
+        int quo = n;
+        
+        while(quo!=0)
+        {
+            if(quo>26)
+            {
+            int rem = quo%26;
+            quo = quo/26;
+            if(rem!=0)
+            res = map.get(rem)+res;
+            if(rem==0)
+            {
+             res = map.get(rem+26)+res;
+             quo = quo-1;
+                
+            }
+            }
+            else
+            {
+        		res = map.get(quo)+res;
+        		brek;
+        	}
+            
+        }
+        
+    return res;    
+    }
+}

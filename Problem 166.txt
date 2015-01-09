@@ -1,0 +1,73 @@
+public class Solution {
+    public String fractionToDecimal(int numerator, int denominator) {
+        String ans="";
+        ans = fact(numerator,denominator,new HashMap<Integer,Integer>(),0,0,ans,0);
+        return ans;
+    }
+    public String fact(int num,int den,HashMap<Integer,Integer> map,int flag,int pos,String ans,int ch)
+    {
+          
+            if(num<0&&den<0)
+            {
+              if(num!=Integer.MIN_VALUE)
+              num =num*-1;
+              else
+               ch=1;
+              if(den!=Integer.MIN_VALUE)
+              den = den*-1;
+              else
+              ch=1;
+            }
+           if(ch==0&&num<0&&den>0)
+           {
+            
+            ans = ans+"-";
+            num= num*-1;
+           }
+           if(ch==0&&num>0&&den<0)
+            {
+            if(ch==0)
+            ans = ans+"-";
+            den= den*-1;
+            }
+            if(ans.contains("("))
+              {
+              if(ch==1)
+               return ans.substring(1,ans.length());
+              return ans;
+              }
+        	int c = num/den;
+        	if(den*c==num)
+        	  {
+        	  
+        	   ans = ans+c;
+        	   if(ch==1)
+               return ans.substring(1,ans.length());
+        	   return ans;
+        	  }
+           
+           ans = ans+c;
+           num = num-(c*den);
+           if(flag==0)
+           {
+           ans= ans+".";
+           pos = ans.length();
+           }
+           flag=1;
+           num = num*10;
+           if(map.containsKey(num))
+             {
+                 flag=2;
+                 int start = map.get(num);
+                 int end = ans.length()-1;
+                 ans = ans.substring(0,start)+"("+ans.substring(start,end+1)+")";
+                 return ans;
+             }
+           
+           map.put(num,pos);
+           pos++;
+           ans = fact(num,den,map,flag,pos,ans,ch);
+           
+		 return ans;
+    }
+}
