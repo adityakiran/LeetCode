@@ -1,0 +1,37 @@
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+       List<List<Integer>> map = new ArrayList<List<Integer>>();
+        for(int l=0;l<candidates.length;l++)
+        {
+              List<Integer>tmp = new ArrayList<Integer>();
+              if(candidates[l]==target)
+               {
+               tmp.add(candidates[l]);
+               if(!map.contains(tmp))
+               map.add(tmp);
+                   
+               }
+               if(candidates[l]>target)
+                continue;
+               if(candidates[l]<target)
+               {
+                   List<List<Integer>> map1;
+                   map1 = combinationSum(candidates,target-candidates[l]);
+                   for(int i=0;i<map1.size();i++)
+                   {
+                       List<Integer> tmp5 = new ArrayList<Integer>(); 
+                       tmp5.add(candidates[l]);
+                       for(int j=0;j<map1.get(i).size();j++)
+                       {
+                           tmp5.add(map1.get(i).get(j));
+                       }
+                       Collections.sort(tmp5);
+                       if(!map.contains(tmp5))
+                       map.add(tmp5);
+                   }
+               } 
+        }
+        return map;
+    }
+    
+}

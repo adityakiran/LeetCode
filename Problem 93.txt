@@ -1,0 +1,61 @@
+public class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> a = new ArrayList<String>();
+        if(s.length()<4||s.length()>12)
+         return a;
+        a = restoreIp(s,0);
+        return a;
+    }
+   public List<String> restoreIp(String s,int c )
+    {
+       List<String> a =new ArrayList<String>();
+       
+       int fl = 0;
+       if(s.length()==0)
+        return a;
+       String tmp="";
+       for(int j=1;j<=3;j++)
+       {
+    	   List<String> tmp1 = new ArrayList<String>();
+    	 fl=0;
+        if(j<=s.length())
+         tmp = s.substring(0,j);
+        else
+         break;
+        if(c==3)
+        {
+        	if(s.substring(j,s.length()).length()>0)
+        	{
+        		continue;
+        	}
+        }
+        if(Integer.parseInt(tmp)<0||Integer.parseInt(tmp)>255)
+          continue;
+        if(tmp.length()>1&&tmp.charAt(0)=='0')
+        	continue;
+        if(j<s.length())
+        tmp1 = restoreIp(s.substring(j,s.length()),c+1);
+        else if(c<=2&&tmp1.isEmpty())
+        { 
+        	continue;
+        }
+        if(c<=2)
+        {
+            for(int i=0;i<tmp1.size();i++)
+            {
+            	
+                String str = tmp1.get(i);
+                a.add(tmp+"."+ str);
+            	
+            }
+        }
+        else
+        {
+        	if(!a.contains(tmp))
+            a.add(tmp);
+        }
+        
+       }
+       return a;
+    }
+}

@@ -1,0 +1,58 @@
+public class Solution {
+    public List<List<Integer>> subsets(int[] S) {
+        HashMap <Integer,List<List<Integer>>> sol = new HashMap<Integer,List<List<Integer>>>();
+        return subset(S,sol,0);
+    }
+    public List<List<Integer>> subset(int[] S,HashMap <Integer,List<List<Integer>>> sol,int k)
+    {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<Integer> tmp2 = new ArrayList<Integer>();
+        
+      //  for(int i=k;i<S.length;i++)
+    //    {
+        	 if(!sol.containsKey(k))
+            {
+            List<Integer> tmp = new ArrayList<Integer>();
+            List<List<Integer>> res1 = null;
+            tmp.add(S[k]);
+            res.add(tmp);
+            if(k+1<S.length)
+              res1 = subset(S,sol,k+1);
+            else
+            {
+            res.add(tmp2);
+            return res;
+            }
+           // System.out.println("a"+"\t"+res1);
+            for(int j=0;j<res1.size();j++)
+            {
+                res.add(res1.get(j));
+                if(res1.get(j).size()==0)
+                 continue;
+                List<Integer> tmp1 = new ArrayList<Integer>();
+                
+                for(int l=0;l<res1.get(j).size();l++)
+                {
+                	tmp1.add(res1.get(j).get(l));
+                }
+                tmp1.add(S[k]);
+                Collections.sort(tmp1);
+                res.add(tmp1);
+            }
+             
+               
+        
+           // System.out.println("b"+"\t"+res);
+            sol.put(k,res);
+            
+            }
+        
+        else
+        {
+            res = sol.get(k);
+        }
+      //  }
+        //System.out.println(k+"\t"+res);
+        return res;
+    }
+}

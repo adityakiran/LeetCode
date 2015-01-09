@@ -1,0 +1,98 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null;
+        ListNode temp1=null;
+        int num=0,carry=0,flag=0;
+          head = new ListNode(0);
+          head.next = null;
+          temp1 = head;
+          int count =0;
+        while(true)
+        {
+            
+            if(l1==null&&l2==null)
+             {
+                 if(carry>0)
+                  {
+                   num=1;
+                   carry=0;
+                   flag=1;
+                  }
+                  else
+                   break;
+             }
+           else if(l1==null)
+            {
+                if(l2.val+carry>=10)
+                {
+                    num=0;
+                    carry=1;
+                }
+                else
+                {
+                 num = l2.val+carry;
+                 carry = 0;
+                }
+                l2 = l2.next;
+            }
+           else if(l2==null)
+            {
+                if(l1.val+carry>=10)
+                {
+                    num=0;
+                    carry=1;
+                }
+                else
+                {
+                 num = l1.val+carry;
+                 carry = 0;
+                }
+                l1 = l1.next;
+            }
+            else
+            {
+                if(l1.val+l2.val+carry>=10)
+                {
+                    num=(l1.val+l2.val+carry)%10;
+                    carry=1;
+                }
+                else
+                {
+                 num = l1.val+l2.val+carry;
+                 carry = 0;
+                }
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            if(count==0)
+            {
+                temp1.val = num;
+                if(flag==1)
+                 break;
+            }
+            else
+            {
+               ListNode tmp = new ListNode(num);
+                tmp.next = null;
+                temp1.next = tmp;
+                if(flag==1)
+                 break;
+                temp1 = tmp;
+                
+            }
+            count++;
+        }
+        return head;
+    }
+}

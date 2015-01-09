@@ -1,0 +1,90 @@
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int []res = new int[2];
+      /*  int min=Integer.MAX_VALUE ;
+        int max = Integer.MIN_VALUE;
+        for(int i=0;i<numbers.length-1;i++)
+        {
+            int flag=0;
+            if(numbers[i]>target)
+             continue;
+            int num1 = numbers[i];
+            if( min!=Integer.MAX_VALUE&&max!= Integer.MIN_VALUE)
+            {
+                if(num1+max<target)
+                  continue;
+                if(num1+min>target)
+                 continue;
+            }
+            if(num1==min)
+            {
+                 min=Integer.MAX_VALUE;
+            }
+            if(num1==max)
+            {
+                max = Integer.MIN_VALUE;
+            }
+            for(int j=i+1;j<numbers.length/2;j++)
+            {
+                if(numbers[j]<min)
+                 min = numbers[j];
+                if(numbers[j]>max)
+                 max = numbers[j];
+                if(numbers[j]<num1)
+                 continue;
+                if(numbers[j]>num1&&(num1+numbers[j]==target))
+                {
+                    res[0] = i+1;
+                    res[1] = j+1;
+                    break;
+                }
+            
+            if(res[0]!=0&&res[1]!=0)
+            {
+             flag=1;
+             break;
+            }
+            }
+            if(flag==0)
+            {
+            for(int j=numbers.length-1;j>=numbers.length/2;j--)
+            {
+                if(numbers[j]<min)
+                 min = numbers[j];
+                if(numbers[j]>max)
+                 max = numbers[j];
+                if(numbers[j]<num1)
+                 continue;
+                if(numbers[j]>num1&&(num1+numbers[j]==target))
+                {
+                    res[0] = i+1;
+                    res[1] = j+1;
+                    break;
+                }
+            
+            if(res[0]!=0&&res[1]!=0)
+             break;
+            }
+            }
+        }*/
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        for(int i=0;i<numbers.length;i++)
+        {
+            map.put(numbers[i],i);
+        }
+        for(int i=0;i<numbers.length;i++)
+        {
+            int num = numbers[i];
+            if(map.containsKey(target-num))
+             {
+             if(i<map.get(target-num))
+             {
+             res[0] = i+1;
+             res[1] = map.get(target-num)+1;
+             }
+                 
+             }
+        }
+        return res;
+    }
+    }

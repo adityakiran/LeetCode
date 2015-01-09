@@ -1,0 +1,100 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+     HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+     for(int k=0;k<9;k++)
+     {  
+     for(int i=1;i<=9;i++)
+      map.put(i,0);
+     int count=0;
+     for(int i=0;i<9;i++)
+     {
+        if(board[i][k]=='.')
+          continue;
+        else
+        {
+            if(board[i][k]-'0'>9||board[i][k]-'0'<=0)
+             return false;
+            count = count+1;
+            int m = map.get(board[i][k]-'0');
+            map.put(board[i][k]-'0',(++m));
+        }
+     }
+     for(int i=1;i<=9;i++)
+     {
+         if(map.get(i)>1)
+          return false;
+        if(count==9)
+        {
+            if(map.get(i)>1||map.get(i)==0)
+             return false;
+          }
+     }
+     }
+    for(int k=0;k<9;k++)
+     {  
+     for(int i=1;i<=9;i++)
+      map.put(i,0);
+     int count=0;
+     for(int i=0;i<9;i++)
+     {
+        if(board[k][i]=='.')
+          continue;
+        else
+        {
+            if(board[k][i]-'0'>9||board[k][i]-'0'<=0)
+             return false;
+            count = count+1;
+            int m = map.get(board[k][i]-'0');
+            map.put(board[k][i]-'0',(++m));
+        }
+     }
+     for(int i=1;i<=9;i++)
+     {
+         if(map.get(i)>1)
+          return false;
+        if(count==9)
+        {
+            if(map.get(i)>1||map.get(i)==0)
+             return false;
+        }
+     }
+     }
+    for(int l=0;l<9;l=l+3) 
+    {
+    
+    for(int h=0;h<9;h=h+3)
+    {
+    for(int i=1;i<=9;i++)
+      map.put(i,0);
+     int count=0;
+    
+    
+    for(int i=l;i<l+3;i++)
+    {
+        for(int j=h;j<h+3;j++)
+        {
+            if(board[i][j]=='.')
+               continue;
+        else
+        {
+            count = count+1;
+            int m = map.get(board[i][j]-'0');
+            map.put(board[i][j]-'0',(++m));
+        }
+        }
+    }
+    for(int i=1;i<=9;i++)
+     {
+         if(map.get(i)>1)
+          return false;
+        if(count==9)
+        {
+            if(map.get(i)>1||map.get(i)==0)
+             return false;
+        }
+     }
+    }
+    }
+     return true;
+    }
+}

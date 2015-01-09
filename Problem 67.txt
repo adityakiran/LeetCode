@@ -1,0 +1,48 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+        //a = "11";
+        //b = "1";
+        int max=0,ch=0,min=0,carry=0;
+        StringBuffer rev_a = new StringBuffer(a);
+        StringBuffer rev_b = new StringBuffer(b);
+        if(a.length()<b.length())
+          {
+              ch=1;
+              a = rev_a.reverse().toString();
+              for(int i=a.length();i<b.length();i++)
+              {
+               a=a+0;    
+              }
+          }
+        if(a.length()>b.length())
+          {
+              ch=2;
+              b = rev_b.reverse().toString();
+              for(int i=b.length();i<a.length();i++)
+              {
+               b=b+0;    
+              }
+          }
+        StringBuffer reve_a = new StringBuffer(a);
+        StringBuffer reve_b = new StringBuffer(b);
+        if(ch!=1)
+        reve_a = reve_a.reverse();
+        if(ch!=2)
+        reve_b = reve_b.reverse();
+        String sum = new String();
+        sum="";
+        for(int i=0;i<reve_a.length();i++)
+        {
+            sum=sum+((reve_a.charAt(i)-'0')^(reve_b.charAt(i)-'0')^carry);
+            if(((reve_a.charAt(i)-'0')&(reve_b.charAt(i)-'0'))==1||((reve_b.charAt(i)-'0')&carry)==1||((reve_a.charAt(i)-'0')&carry)==1)
+             carry=1;
+            else
+             carry=0;
+        }
+        if(carry==1)
+         sum=sum+1;
+        StringBuffer sumreturn = new StringBuffer(sum);
+        return sumreturn.reverse().toString();
+    }
+    
+}
