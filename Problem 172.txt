@@ -1,0 +1,19 @@
+public class Solution {
+    public int trailingZeroes(int n) {
+        if(n==0)
+         return 0;
+        int n1=0;
+        int k = 5;
+        int max = Integer.MAX_VALUE;
+        int m=0;
+        while(n/k>0)
+        {
+        n1 = n1+ n/k;
+        if(max/k<5)
+         break;
+        k = k*5;
+        m++;
+        }
+        return n1;
+    }
+}
